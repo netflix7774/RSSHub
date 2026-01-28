@@ -1,4 +1,4 @@
-app = "rsshub"
+app = "rsshub-leehskid"
 
 [http_service]
 internal_port = 1200
