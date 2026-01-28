@@ -1,12 +1,14 @@
 app = "rsshub-leehskid"
 
-[build]
-
 [env]
   PORT = "1200"
-  HOST = "0.0.0.0"            # 클로드 추천: 명시적 호스트 지정
-  LISTEN_INADDR_ANY = "1"     # 클로드 추천: 모든 주소 허용
+  HOST = "0.0.0.0"
+  LISTEN_INADDR_ANY = "1"
   NODE_ENV = "production"
+
+# 클로드의 핵심 비책: 실행 명령어를 강제로 지정합니다.
+[processes]
+  app = "node lib/index.js --host 0.0.0.0 --port 1200"
 
 [http_service]
   internal_port = 1200
@@ -14,9 +16,11 @@ app = "rsshub-leehskid"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-  
+
 [[http_service.checks]]
-  grace_period = "300s"       # 제미나이 추천: 5분간 인내하며 기다림
+  # 제미나이의 비책: 부팅 시간을 5분(300초)으로 늘려 확실히 기다려줍니다.
+  grace_period = "300s" 
   interval = "30s"
+  method = "GET"
   timeout = "20s"
   path = "/"
