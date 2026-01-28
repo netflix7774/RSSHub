@@ -1,8 +1,9 @@
 app = "rsshub-leehskid"
 
+[build]
+
 [env]
   PORT = "1200"
-  # RSSHub가 모든 네트워크 인터페이스에서 응답하게 합니다. (클로드 추천)
   LISTEN_INADDR_ANY = "1"
   NODE_ENV = "production"
 
@@ -12,11 +13,10 @@ app = "rsshub-leehskid"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-
-[[http_service.checks]]
-  # 부팅 시간을 충분히(1분) 기다려줍니다.
-  grace_period = "60s" 
-  interval = "30s"
-  method = "GET"
-  timeout = "10s"
-  path = "/"
+  
+  [[http_service.checks]]
+    grace_period = "90s"  # 더 길게 설정
+    interval = "30s"
+    method = "GET"
+    timeout = "10s"
+    path = "/"
