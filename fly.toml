@@ -4,7 +4,8 @@ app = "rsshub-leehskid"
 
 [env]
   PORT = "1200"
-  LISTEN_INADDR_ANY = "1"
+  HOST = "0.0.0.0"            # 클로드 추천: 명시적 호스트 지정
+  LISTEN_INADDR_ANY = "1"     # 클로드 추천: 모든 주소 허용
   NODE_ENV = "production"
 
 [http_service]
@@ -14,9 +15,8 @@ app = "rsshub-leehskid"
   auto_start_machines = true
   min_machines_running = 0
   
-  [[http_service.checks]]
-    grace_period = "90s"  # 더 길게 설정
-    interval = "30s"
-    method = "GET"
-    timeout = "10s"
-    path = "/"
+[[http_service.checks]]
+  grace_period = "300s"       # 제미나이 추천: 5분간 인내하며 기다림
+  interval = "30s"
+  timeout = "20s"
+  path = "/"
